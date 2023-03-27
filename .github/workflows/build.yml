@@ -25,6 +25,8 @@ jobs:
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
-      - run: jfrog config show
+      - run: |
+          jfrog rt u "build.tar.gz" ga/${{ github.run_number }}
+      
         
       
