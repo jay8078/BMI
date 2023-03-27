@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
   push:
 
-env:
-  JF_URL: ${{ secrets.JF_URL }} 
-  JF_TOKEN: ${{ secrets.JF_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,16 +18,13 @@ jobs:
       - name: Artifactory 
         uses: jfrog/setup-jfrog-cli@v1
         env:
-          JF_URL: ${{ secrets.JF_URL }} 
-          JF_TOKEN: ${{ secrets.JF_TOKEN }}
+          JF_EXPORT: ${{ secrets.JF_EXPORT }}
       # Build
       - run: npm i
       - run: ls && pwd
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
-      - run: jfrog config add --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }}
-      - run: jfrog config export ${{ secrets.JF_URL }}
-      - run: jfrog rt show
+      - run: jfrog config show
         
       
