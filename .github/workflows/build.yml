@@ -30,7 +30,7 @@ jobs:
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
-      - run: jfrog rt config --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }}
+      - run: jfrog config add --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }}
       - run: jfrog rt show
         
       
