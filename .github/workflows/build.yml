@@ -26,7 +26,7 @@ jobs:
       - run: ls && pwd
       - run: jfrog --version
       - run: |
-          jfrog rt u "build.tar.gz" ga/${{ github.run_number }}
+          jfrog rt u --url=${{ secrets.JF_URL }} "build.tar.gz" ga/${{ github.run_number }}
       
         
       
