@@ -26,6 +26,7 @@ jobs:
       - run: ls && pwd
       - run: jfrog --version
       - run: jfrog config show
+      - run: jfrog config use GA_JF
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} "build.tar.gz" ga/test
       
         
