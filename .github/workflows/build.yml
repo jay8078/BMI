@@ -31,6 +31,7 @@ jobs:
       - run: ls && pwd
       - run: jfrog --version
       - run: jfrog config add --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }}
+      - run: jfrog config export ${{ secrets.JF_URL }}
       - run: jfrog rt show
         
       
