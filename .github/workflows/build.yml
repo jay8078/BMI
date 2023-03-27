@@ -26,7 +26,6 @@ jobs:
       - run: ls && pwd
       - run: jfrog --version
       - run: jfrog rt c show
-      - run: jf -v
       - run: jfrog rt u --url=${{ secrets.JF_URL }} "package.json" ga/${{ github.run_number }}
       
         
