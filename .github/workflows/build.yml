@@ -4,6 +4,10 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  JF_URL: ${{ secrets.JF_URL }} 
+  JF_TOKEN: ${{ secrets.JF_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,11 +21,15 @@ jobs:
           node-version: '16'
       - name: Artifactory 
         uses: jfrog/setup-jfrog-cli@v1
+        env:
+          JF_URL: ${{ secrets.JF_URL }} 
+          JF_TOKEN: ${{ secrets.JF_TOKEN }}
       # Build 
       - run: npm i
       - run: ls && pwd
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
+      - run: jf rt ping
         
       
