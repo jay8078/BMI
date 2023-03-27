@@ -25,9 +25,9 @@ jobs:
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
-      - run: |
-          jfrog rt ping
-          jfrog rt u --url=${{ secrets.JF_URL }} "build.tar.gz" ga/${{ github.run_number }}
+      - run: jfrog rt c show
+      - run: jf -v
+      - run: jfrog rt u --url=${{ secrets.JF_URL }} "package.json" ga/${{ github.run_number }}
       
         
       
