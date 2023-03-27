@@ -14,5 +14,11 @@ jobs:
         with:
           node-version: '16'
       - run: npm i
+      - run: ls && pwd
+      - run: tar -cvf * build.tar.gz
+      - run: ls
+      - name: Artifactory 
+        uses: jfrog/setup-jfrog-cli@v1
+      - run: jfrog --version
         
       
