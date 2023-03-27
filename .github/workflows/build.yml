@@ -30,6 +30,6 @@ jobs:
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       - run: jfrog --version
-      - run: jf rt ping
+      - run: jfrog rt ping
         
       
