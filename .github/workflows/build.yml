@@ -1,1 +1,17 @@
+name: BMI
 
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu:20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Nodejs
+        uses: actions/checkout@v3
+        with:
+          node-version: '16'
+        -run: npm i
+        
+      
