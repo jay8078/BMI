@@ -19,7 +19,7 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v1
         env:
           JF_EXPORT: ${{ secrets.JF_EXPORT }}
-      # Build
+      # Buildd
       - run: npm i
       - run: ls && pwd
       - run: tar -cvf build.tar.gz *
