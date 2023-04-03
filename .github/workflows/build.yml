@@ -37,7 +37,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
-      #Upload Artifacts
+      #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "build.tar.gz" ga/${{github.run_number}}/
