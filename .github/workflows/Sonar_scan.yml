@@ -3,6 +3,8 @@ name: SonarScan
 on:
   workflow_dispatch:
   push:
+    branches:
+      - workflows
   pull_request:
 
 jobs:
