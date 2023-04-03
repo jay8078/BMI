@@ -3,6 +3,8 @@ name: BMI
 on:
   workflow_dispatch:
   push:
+    branches:
+      - workflows
 
 jobs:
   build:
