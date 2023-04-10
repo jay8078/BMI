@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-  BUILD_TIMESTAMP: $(date -d "${{ github.event.head_commit.timestamp }}" +%Y-%m-%d\ %H:%M:%S)
+  BUILD_TIMESTAMP: $(date -d "${{ github.event.head_commit.timestamp }}")
 
 jobs:
   build:
