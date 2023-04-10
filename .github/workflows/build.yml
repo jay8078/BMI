@@ -56,7 +56,7 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-          ***BUILD SUCCESS***
+          BUILD SUCCESS
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
