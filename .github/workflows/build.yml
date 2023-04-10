@@ -9,7 +9,7 @@ on:
 env:
   BUILD_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
   BUILD_TIMESTAMP: $(date -d "${{ github.event.head_commit.timestamp }}")
-  BINARY: "${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_'${{github.run_number}}'/'$GITHUB_WORKFLOW'.tar.gz"
+  BINARY: "${{ secrets.JF_URL }}/$GITHUB_WORKFLOW/B_${{github.run_number}}/$GITHUB_WORKFLOW.tar.gz"
   START_TIME: $(date -d "${{ github.event.head_commit.timestamp }}" +%s)
   END_TIME: $(date +%s)
   ELAPSED_TIME: $(($END_TIME - $START_TIME))
@@ -57,7 +57,7 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-          \U+1F973 ***BUILD SUCCESS*** \U+1F973	
+          \u1F973 ***BUILD SUCCESS*** \u1F973	
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
@@ -76,7 +76,7 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-            \U+1FAE3 ***BUILD FAILED*** \U+1FAE3
+            \u1FAE3 ***BUILD FAILED*** \u1FAE3
             Build Triggered by: '$GITHUB_ACTOR'
             Job URL: '$BUILD_URL'
             Project Name: '$GITHUB_REPOSITORY'
