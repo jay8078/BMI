@@ -52,11 +52,12 @@ jobs:
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B_${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
       - name: Send sucess notification
+        if: success()
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-          BUILD SUCCESS
+          :grin: ***BUILD SUCCESS*** :grin:
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
@@ -65,7 +66,6 @@ jobs:
           Branch Name: '$GITHUB_REF'
           Build Started at: '${{ github.event.head_commit.timestamp }}'
           BUILD EVENT: '$GITHUB_EVENT_NAME'
-          BUILD DURATION: '$ELAPSED_TIME'
           BINARY URL: '$BINARY'
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
