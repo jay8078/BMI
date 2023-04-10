@@ -42,6 +42,12 @@ jobs:
 #       - run: jfrog config show
 #       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "build.tar.gz" ga/${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
+      - name: Send notification
+        uses: google-github-actions/chat@main
+        with:
+          webhook-url: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          message: |
+            Build triggered by $GITHUB_ACTOR on branch $GITHUB_REF
 
       
         
