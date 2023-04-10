@@ -50,17 +50,18 @@ jobs:
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{
-            "text": "
-            Build Triggered by: "'$GITHUB_ACTOR'"
-            Job URL: "'$BUILD_URL'"
-            Project Name: 
-            Job Name: "'$GITHUB_WORKFLOW'"
-            Build Number: "'${{github.run_number}}'"
-            Branch Name: "'$GITHUB_BASE_REF'"
-            Build Started at: "'${BUILD_TIMESTAMP'"
-            BUILD EVENT: "'$GITHUB_EVENT_NAME'"
-            "
+          "text": "
+          Build Triggered by: '$GITHUB_ACTOR'
+          Job URL: '$BUILD_URL'
+          Project Name: 
+          Job Name: '$GITHUB_WORKFLOW'
+          Build Number: '${{github.run_number}}'
+          Branch Name: '$GITHUB_BASE_REF'
+          Build Started at: '${{ github.event.head_commit.timestamp }}'
+          BUILD EVENT: '$GITHUB_EVENT_NAME'
+          "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+        
 
       
         
