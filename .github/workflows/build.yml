@@ -89,7 +89,7 @@ jobs:
 #           BUILD END TIME: '$END_TIME_ISO'
 #           BUILD EVENT: '$GITHUB_EVENT_NAME'
 #           "
-#           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }} 
+#           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         
 
       
