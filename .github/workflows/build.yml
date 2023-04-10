@@ -9,7 +9,7 @@ on:
 env:
   BUILD_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
   BUILD_TIMESTAMP: $(date -d "${{ github.event.head_commit.timestamp }}")
-  BINARY: ${{ secrets.JF_URL }}/$GITHUB_WORKFLOW/B${{github.run_number}}/$GITHUB_WORKFLOW.tar.gz
+  BINARY: ${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_'${{github.run_number}}'/'$GITHUB_WORKFLOW'.tar.gz
   START_TIME: $(date -d "${{ github.event.head_commit.timestamp }}" +%s)
   END_TIME: $(date +%s)
   ELAPSED_TIME: $(($END_TIME - $START_TIME))
@@ -49,13 +49,14 @@ jobs:
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B${{github.run_number}}/
+      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B_${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
       - name: Send sucess notification
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
+          ***BUILD SUCCESS***
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
@@ -64,6 +65,7 @@ jobs:
           Branch Name: '$GITHUB_REF'
           Build Started at: '${{ github.event.head_commit.timestamp }}'
           BUILD EVENT: '$GITHUB_EVENT_NAME'
+          BUILD DURATION: '$ELAPSED_TIME'
           BINARY URL: '$BINARY'
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
