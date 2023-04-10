@@ -32,15 +32,15 @@ jobs:
       - run: tar -cvf build.tar.gz *
       - run: ls && pwd
       #SonarQube scan
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
+#       - name: SonarQube Scan
+#         uses: sonarsource/sonarqube-scan-action@master
+#         env:
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#           SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
       #Upload Artifactss
-      - run: jfrog --version
-      - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "build.tar.gz" ga/${{github.run_number}}/
+#       - run: jfrog --version
+#       - run: jfrog config show
+#       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "build.tar.gz" ga/${{github.run_number}}/
       - run: cat $GITHUB_ACTOR
 
       
