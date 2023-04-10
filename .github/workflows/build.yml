@@ -49,7 +49,7 @@ jobs:
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "build.tar.gz" $GITHUB_WORKFLOW/${{github.run_number}}/
+      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
       - name: Send sucess notification
         if: success()
