@@ -56,20 +56,34 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-            ||| BUILD SUCCESS |||
-            Build Triggered by: '$GITHUB_ACTOR'
-            Job URL: '$BUILD_URL'
-            Project Name: '$GITHUB_REPOSITORY'
-            Job Name: '$GITHUB_WORKFLOW'
-            Build Number: '${{github.run_number}}'
-            Branch Name: '$GITHUB_REF'
-            Build Started at: '${{ github.event.head_commit.timestamp }}'
-            BUILD EVENT: '$GITHUB_EVENT_NAME'
-            BUILD DURATION: '$ELAPSED_TIME'
-            BUILD END TIME: '$END_TIME_ISO'
-            BINARY URL: '$BINARY'
+          Build Triggered by: '$GITHUB_ACTOR'
+          Job URL: '$BUILD_URL'
+          Project Name: '$GITHUB_REPOSITORY'
+          Job Name: '$GITHUB_WORKFLOW'
+          Build Number: '${{github.run_number}}'
+          Branch Name: '$GITHUB_REF'
+          Build Started at: '${{ github.event.head_commit.timestamp }}'
+          BUILD EVENT: '$GITHUB_EVENT_NAME'
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+#         run: |
+#           curl -X POST -H "Content-Type: application/json" \
+#           -d '{
+#           "text": "
+#             ||| BUILD SUCCESS |||
+#             Build Triggered by: '$GITHUB_ACTOR'
+#             Job URL: '$BUILD_URL'
+#             Project Name: '$GITHUB_REPOSITORY'
+#             Job Name: '$GITHUB_WORKFLOW'
+#             Build Number: '${{github.run_number}}'
+#             Branch Name: '$GITHUB_REF'
+#             Build Started at: '${{ github.event.head_commit.timestamp }}'
+#             BUILD EVENT: '$GITHUB_EVENT_NAME'
+#             BUILD DURATION: '$ELAPSED_TIME'
+#             BUILD END TIME: '$END_TIME_ISO'
+#             BINARY URL: '$BINARY'
+#           "
+#           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         
 #       - name: Send failure notification
 #         if: failure()
