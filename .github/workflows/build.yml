@@ -53,10 +53,10 @@ jobs:
           "text": "
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
-          Project Name: 
+          Project Name: '$GITHUB_REPOSITORY'
           Job Name: '$GITHUB_WORKFLOW'
           Build Number: '${{github.run_number}}'
-          Branch Name: '$GITHUB_BASE_REF'
+          Branch Name: '$GITHUB_REF'
           Build Started at: '${{ github.event.head_commit.timestamp }}'
           BUILD EVENT: '$GITHUB_EVENT_NAME'
           "
