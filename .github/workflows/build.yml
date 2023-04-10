@@ -64,6 +64,7 @@ jobs:
           Branch Name: '$GITHUB_REF'
           Build Started at: '${{ github.event.head_commit.timestamp }}'
           BUILD EVENT: '$GITHUB_EVENT_NAME'
+          BINARY URL: '$BINARY'
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
 #         run: |
