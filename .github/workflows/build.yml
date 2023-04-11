@@ -37,7 +37,7 @@ jobs:
           java-version: 11
       #Send Notifications
       - name: Use shared library
-        uses: my-org/my-repo/my-shared-lib@main
+        uses: jay8078/shared_libs@main
       # Buildd
       - run: npm i
       - run: ${{ job.status }}
@@ -56,7 +56,7 @@ jobs:
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B_${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
       - name: Use shared library
-        uses: my-org/my-repo/my-shared-lib@main
+        uses: jay8078/shared_libs@main
         
       
         
