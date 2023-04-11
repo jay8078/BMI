@@ -87,9 +87,9 @@ jobs:
             BINARY URL: ${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_${{github.run_number}}/'$GITHUB_WORKFLOW'.tar.gz
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-          
-          if: failure()
-          run: |
+      - name: Send Build Notifications  
+        if: failure()
+        run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
