@@ -57,7 +57,8 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-          \U1F973 ***BUILD SUCCESS*** \U1F973	
+           ***BUILD SUCCESS***
+          ${{ job.status }}	
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
@@ -76,7 +77,8 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{
           "text": "
-            \U1FAE3 ***BUILD FAILED*** \U1FAE3
+            ***BUILD FAILED***
+            ${{ job.status }}
             Build Triggered by: '$GITHUB_ACTOR'
             Job URL: '$BUILD_URL'
             Project Name: '$GITHUB_REPOSITORY'
