@@ -59,7 +59,7 @@ jobs:
           -d '{
           "text": "
            ***BUILD SUCCESS***
-          ${{ job.status }}	
+           BUILD ${{ job.status | uppercase }}	
           Build Triggered by: '$GITHUB_ACTOR'
           Job URL: '$BUILD_URL'
           Project Name: '$GITHUB_REPOSITORY'
@@ -79,7 +79,7 @@ jobs:
           -d '{
           "text": "
             ***BUILD FAILED***
-            ${{ job.status }}
+            BUILD ${{ job.status | uppercase }}
             Build Triggered by: '$GITHUB_ACTOR'
             Job URL: '$BUILD_URL'
             Project Name: '$GITHUB_REPOSITORY'
