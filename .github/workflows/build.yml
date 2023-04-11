@@ -13,7 +13,7 @@ env:
   START_TIME: $(date -d "${{ github.event.head_commit.timestamp }}" +%s)
   END_TIME: $(date +%s)
   ELAPSED_TIME: $(($END_TIME - $START_TIME))
-  END_TIME_ISO: $(date -d "@$END_TIME" +"%Y-%m-%d %H:%M:%S %Z")
+ # END_TIME_ISO: $(date -d "@$END_TIME" +"%Y-%m-%d %H:%M:%S %Z")
 
 jobs:
   build:
