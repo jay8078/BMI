@@ -37,6 +37,7 @@ jobs:
           java-version: 11
       # Buildd
       - run: npm i
+      - run: ${{ job.status }}
       - run: ls && pwd
       - run: tar -cvf $GITHUB_WORKFLOW.tar.gz *
       - run: ls && pwd
