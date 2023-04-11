@@ -36,8 +36,22 @@ jobs:
         with:
           java-version: 11
       #Send Notifications
-      - name: Use shared library
-        uses: jay8078/shared_libs@main
+      - name: Pre-Build notification
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+          "text": "
+             ***BUILD STARTED***	
+            Build Triggered by: '$GITHUB_ACTOR'
+            Job URL: '$BUILD_URL'
+            Project Name: '$GITHUB_REPOSITORY'
+            Job Name: '$GITHUB_WORKFLOW'
+            Build Number: '${{github.run_number}}'
+            Branch Name: '$GITHUB_REF'
+            Build Started at: '${{ github.event.head_commit.timestamp }}'
+            BUILD EVENT: '$GITHUB_EVENT_NAME'
+          "
+          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
       # Buildd
       - run: npm i
       - run: ${{ job.status }}
@@ -55,8 +69,44 @@ jobs:
       - run: jfrog config show
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B_${{github.run_number}}/
       - run: echo $GITHUB_ACTOR
-      - name: Use shared library
-        uses: jay8078/shared_libs@main
+      - name: Send Build Notifications
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+          "text": "
+             ***BUILD SUCCESS***
+            ${{ job.status }}	
+            Build Triggered by: '$GITHUB_ACTOR'
+            Job URL: '$BUILD_URL'
+            Project Name: '$GITHUB_REPOSITORY'
+            Job Name: '$GITHUB_WORKFLOW'
+            Build Number: '${{github.run_number}}'
+            Branch Name: '$GITHUB_REF'
+            Build Started at: '${{ github.event.head_commit.timestamp }}'
+            BUILD EVENT: '$GITHUB_EVENT_NAME'
+            BINARY URL: ${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_${{github.run_number}}/'$GITHUB_WORKFLOW'.tar.gz
+          "
+          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          
+          else:
+          if: failure()
+          run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{
+          "text": "
+            ***BUILD FAILED***
+            ${{ job.status }}
+            Build Triggered by: '$GITHUB_ACTOR'
+            Job URL: '$BUILD_URL'
+            Project Name: '$GITHUB_REPOSITORY'
+            Job Name: '$GITHUB_WORKFLOW'
+            Build Number: '${{github.run_number}}'
+            Branch Name: '$GITHUB_REF'
+            Build Started at: '${{ github.event.head_commit.timestamp }}'
+            BUILD EVENT: '$GITHUB_EVENT_NAME'
+          "
+          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
         
       
         
