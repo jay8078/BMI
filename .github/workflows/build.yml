@@ -54,7 +54,6 @@ jobs:
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
       # Buildd
       - run: npm i
-      - run: ${{ job.status }}
       - run: ls && pwd
       - run: tar -cvf $GITHUB_WORKFLOW.tar.gz *
       - run: ls && pwd
@@ -89,7 +88,6 @@ jobs:
           "
           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
           
-          else:
           if: failure()
           run: |
           curl -X POST -H "Content-Type: application/json" \
