@@ -12,17 +12,17 @@ jobs:
       # Checkout code
       - uses: actions/checkout@v3
       - name: Print GitHub event action
-        run: echo "${{ github.event.action }}"
+        run: echo "${{ github.event_name }}"
       - name: Sleep for 10 seconds
       # Sleep for 10 seconds if it's a push event
         if: github.event_name == 'push'
         run: |
               sleep 10
-              echo "${{ github.event.action }}"
+              echo "${{ github.event_name }}"
           
       # Sleep for 1 minute if it's a pull request event
       - name: Sleep for 1 minute
         if: github.event_name == 'pull_request'
         run: |
               sleep 60
-              echo "${{ github.event.action }}"
+              echo "${{ github.event_name }}"
