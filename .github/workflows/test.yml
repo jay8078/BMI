@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - workflows
+  pull_request:
+  schedule:
+    - cron: '*/10 * * * *' # Run every day at midnight UTC
 
 jobs:
   build:
