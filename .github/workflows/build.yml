@@ -1,10 +1,10 @@
 name: BMI
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - workflows
+  push: 
+  pull_request:
+  schedule:
+    - cron: '*/10 * * * *' # Run every day at midnight UTC
 
 env:
   BUILD_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
