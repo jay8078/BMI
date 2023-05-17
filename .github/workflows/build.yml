@@ -27,7 +27,9 @@ jobs:
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "package.json" BMI/
+      - run: |
+              cd events
+              jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "*" BMI/
       - run: echo ${GITHUB_REF#refs/heads/}
       - name: Set outputs
         id: vars
