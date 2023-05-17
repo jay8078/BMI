@@ -2,11 +2,11 @@
   "files": [
     {
       "pattern": "routes/routes.js",
-      "target": "$GITHUB_WORKFLOW/B_${{github.run_number}}/"
+      "target": "BMI"
     },
     {
       "pattern": "views/*",
-      "target": "$GITHUB_WORKFLOW/B_${{github.run_number}}/"
+      "target": "BMI/"
     }
   ]
 }
