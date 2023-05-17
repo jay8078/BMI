@@ -29,6 +29,7 @@ jobs:
       - run: jfrog config show
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "package.json" BMI/
       - run: echo echo ${GITHUB_REF#refs/heads/}
+      - run: echo echo ${{ github.sha-short }}
       
         
       
