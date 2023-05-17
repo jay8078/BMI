@@ -4,15 +4,6 @@ on:
   push: 
   pull_request:
 
-env:
-  BUILD_URL: "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-  BUILD_TIMESTAMP: $(date -d "${{ github.event.head_commit.timestamp }}")
-  BINARY: "${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_${{github.run_number}}/$GITHUB_WORKFLOW.tar.gz"
-  START_TIME: $(date -d "${{ github.event.head_commit.timestamp }}" +%s)
-  END_TIME: $(date +%s)
-  ELAPSED_TIME: $(($END_TIME - $START_TIME))
- # END_TIME_ISO: $(date -d "@$END_TIME" +"%Y-%m-%d %H:%M:%S %Z")
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,81 +19,17 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v1
         env:
           JF_EXPORT: ${{ secrets.JF_EXPORT }}
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      #Send Notifications
-      - name: Pre-Build notification
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{
-          "text": "
-             ***BUILD STARTED***	
-            Build Triggered by: '$GITHUB_ACTOR'
-            Job URL: '$BUILD_URL'
-            Project Name: '$GITHUB_REPOSITORY'
-            Job Name: '$GITHUB_WORKFLOW'
-            Build Number: '${{github.run_number}}'
-            Branch Name: '$GITHUB_REF'
-            Build Started at: '${{ github.event.head_commit.timestamp }}'
-            BUILD EVENT: '$GITHUB_EVENT_NAME'
-          "
-          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
       # Buildd
       - run: npm i
       - run: ls && pwd
       - run: tar -cvf $GITHUB_WORKFLOW.tar.gz *
       - run: ls && pwd
-      #SonarQube scan
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "$GITHUB_WORKFLOW.tar.gz" $GITHUB_WORKFLOW/B_${{github.run_number}}/
+      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} --spec=upload.json
       - run: echo $GITHUB_ACTOR
-      - name: Send Build Notifications
-        if: success()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{
-          "text": "
-             ***BUILD SUCCESS***
-            ${{ job.status }}	
-            Build Triggered by: '$GITHUB_ACTOR'
-            Job URL: '$BUILD_URL'
-            Project Name: '$GITHUB_REPOSITORY'
-            Job Name: '$GITHUB_WORKFLOW'
-            Build Number: '${{github.run_number}}'
-            Branch Name: '$GITHUB_REF'
-            Build Started at: '${{ github.event.head_commit.timestamp }}'
-            BUILD EVENT: '$GITHUB_EVENT_NAME'
-            BINARY URL: ${{ secrets.JF_URL }}/'$GITHUB_WORKFLOW'/B_${{github.run_number}}/'$GITHUB_WORKFLOW'.tar.gz
-          "
-          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
-      - name: Send Build Notifications  
-        if: failure()
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{
-          "text": "
-            ***BUILD FAILED***
-            ${{ job.status }}
-            Build Triggered by: '$GITHUB_ACTOR'
-            Job URL: '$BUILD_URL'
-            Project Name: '$GITHUB_REPOSITORY'
-            Job Name: '$GITHUB_WORKFLOW'
-            Build Number: '${{github.run_number}}'
-            Branch Name: '$GITHUB_REF'
-            Build Started at: '${{ github.event.head_commit.timestamp }}'
-            BUILD EVENT: '$GITHUB_EVENT_NAME'
-          "
-          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+      
         
       
         
