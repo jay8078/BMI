@@ -2,11 +2,11 @@
   "files": [
     {
       "pattern": "routes/routes.js",
-      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ env.github.run_number }}/"
+      "target": "JFROG_CLI_BUILD_NAME/B_$JFROG_CLI_BUILD_NUMBER/"
     },
     {
       "pattern": "views/*",
-      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ env.github.run_number }}/"
+      "target": "JFROG_CLI_BUILD_NAME/B_$JFROG_CLI_BUILD_NUMBER/"
     }
   ]
 }
