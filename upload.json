@@ -2,11 +2,11 @@
   "files": [
     {
       "pattern": "routes/routes.js",
-      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ github.run_number }}/"
+      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ env.github.run_number }}/"
     },
     {
       "pattern": "views/*",
-      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ github.run_number }}/"
+      "target": "${{ env.GITHUB_WORKFLOW }}/B_${{ env.github.run_number }}/"
     }
   ]
 }
