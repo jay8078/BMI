@@ -31,9 +31,7 @@ jobs:
       - run: echo ${GITHUB_REF#refs/heads/}
       - name: Set outputs
         id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      - name: Check outputs
-        run: echo ${{ steps.vars.outputs.sha_short }}
+        run: echo "$(git rev-parse --short HEAD)"
       
         
       
