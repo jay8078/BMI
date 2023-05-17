@@ -27,7 +27,7 @@ jobs:
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} --spec=upload.json
+      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} --spec=upload.json --http-method=POST
       - run: echo $GITHUB_ACTOR
       
         
