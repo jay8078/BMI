@@ -1,0 +1,19 @@
+<h2>BMI Calculator</h2>
+
+<form name="bmicalc" action="/routes/bmi" method="post">
+<label for="weight">Weight:</label>
+<input type="number" name="weight" placeholder="weight in kgs" required><br><br>
+<label for="height">Height:</label>
+<input type="number" name="height" placeholder="height in cms" required><br>
+<br><button type="submit">Calculate</button>
+<p><%= name %></p>
+</form>
+<!-- <script>
+    function bmi(){
+        let w = document.forms["bmicalc"]["weight"].value;
+        let l = document.forms["bmicalc"]["height"].value;
+
+
+
+    }
+</script> -->

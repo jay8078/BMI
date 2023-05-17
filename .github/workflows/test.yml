@@ -1,0 +1,29 @@
+name: EVENT TEST
+
+on:
+  push:
+    branches:
+      - workflows
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v3
+      - name: Print GitHub event action
+        run: echo "${{ github.event_name }}"
+      - name: RUN ONLY IF PUSH
+      # Sleep for 10 seconds if it's a push event
+        if: github.event_name == 'push'
+        run: |
+              sleep 10
+              echo "${{ github.event_name }}"
+          
+      # Sleep for 1 minute if it's a pull request event
+      - name: RUN ONLY IF PULL REQUEST
+        if: github.event_name == 'pull_request'
+        run: |
+              sleep 60
+              echo "${{ github.event_name }}"
