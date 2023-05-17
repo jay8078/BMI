@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "pattern": "routes/routes.js",
+      "target": "$GITHUB_WORKFLOW/B_${{github.run_number}}/"
+    },
+    {
+      "pattern": "views/*",
+      "target": "$GITHUB_WORKFLOW/B_${{github.run_number}}/"
+    }
+  ]
+}
