@@ -37,7 +37,7 @@ jobs:
           to: jaydeepkaushik@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
-            echo "The workflow status is ${{ github.event.workflow_run.status }}"
+            The workflow status is ${{ github.event.workflow_run.status }}
             
             The build job outcome was: ${{ job.status }}
             
