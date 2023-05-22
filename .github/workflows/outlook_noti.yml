@@ -39,9 +39,9 @@ jobs:
           body: |
             The workflow status is ${{ github.event.workflow_run.status }}
             
-            The build job outcome was: ${{ job.status }}
+            The build job outcome was: ${{ steps.build.outcome}}
             
-            The test job outcome was: ${{ needs.test.outcome }}
+            The test job outcome was: ${{ steps.test.outcome}}
 
             Commit: ${{ github.sha }}
             
