@@ -30,7 +30,7 @@ jobs:
         with:
           server_address: smtp-mail.outlook.com
           server_port: 587
-          username: GitHub Actions
+          username: jaydeepkaushik@outlook.com
           password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
           subject: GitHub Action Notification
           to: JenkinsNotifications@groups.outlook.com
