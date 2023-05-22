@@ -39,11 +39,11 @@ jobs:
             The build job outcome was: ${{needs.build.outputs.status_build}}
             The test job outcome was: ${{needs.test.outputs.status_test}}
             Job Status: ${{ job.status }}
-            Build Triggered by: ${{ GITHUB.ACTOR }}
-            Job URL: ${{ BUILD_URL }}
-            Project Name: ${{ GITHUB_REPOSITORY }}
-            Job Name: ${{ GITHUB_WORKFLOW }}
+            Build Triggered by: ${{ github.triggering_actor }}
+            Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Project Name: ${{ github.repository }}
+            Job Name: ${{ github.workflow }}
             Build Number: ${{github.run_number}}
-            Branch Name: ${{ GITHUB_REF }}
+            Branch Name: ${{ github.ref_name }}
             Build Started at: ${{ github.event.head_commit.timestamp }}
-            BUILD EVENT: ${{ GITHUB_EVENT_NAME }}
+            BUILD EVENT: ${{ github.event_name }}
