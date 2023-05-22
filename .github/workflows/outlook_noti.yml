@@ -9,12 +9,16 @@ jobs:
     steps:
        - name: Build
          run: echo "Build....."
+    outputs:
+       status_build: ${{ job.status }}
          
   test:
     runs-on: ubuntu-latest
     steps:
        - name: Build
          run: echo "Test....."
+    outputs:
+       status_test: ${{ job.status }}
          
   send_notification:
     needs: [build, test]
@@ -39,9 +43,9 @@ jobs:
           body: |
             The workflow status is ${{ github.event.workflow_run.status }}
             
-            The build job outcome was: ${{ steps.build.outcome}}
+            The build job outcome was: ${{needs.build.outputs.status_build}}
             
-            The test job outcome was: ${{ steps.test.outcome}}
+            The test job outcome was: ${{needs.test.outputs.status_test}}
 
             Commit: ${{ github.sha }}
             
