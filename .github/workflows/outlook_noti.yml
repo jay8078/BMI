@@ -21,15 +21,9 @@ jobs:
        status_test: ${{ job.status }}
          
   send_notification:
-    needs: [build, test]
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
