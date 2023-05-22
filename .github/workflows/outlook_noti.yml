@@ -21,6 +21,7 @@ jobs:
        status_test: ${{ job.status }}
          
   send_notification:
+    needs: [build, test]
     runs-on: ubuntu-latest
 
     steps:
@@ -35,16 +36,14 @@ jobs:
           to: jaydeepkaushik@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
-            The workflow status is ${{ github.event.workflow_run.status }}
-            
             The build job outcome was: ${{needs.build.outputs.status_build}}
-            
             The test job outcome was: ${{needs.test.outputs.status_test}}
-
-            Commit: ${{ github.sha }}
-            
-            Commit message: ${{ github.event.head_commit.message }}
-            
-            Commit author: ${{ github.event.head_commit.author.name }}
-            
-            Workflow run ID: ${{ github.run_id }}
+            Job Status: ${{ job.status }}
+            Build Triggered by: '$GITHUB_ACTOR'
+            Job URL: '$BUILD_URL'
+            Project Name: '$GITHUB_REPOSITORY'
+            Job Name: '$GITHUB_WORKFLOW'
+            Build Number: '${{github.run_number}}'
+            Branch Name: '$GITHUB_REF'
+            Build Started at: '${{ github.event.head_commit.timestamp }}'
+            BUILD EVENT: '$GITHUB_EVENT_NAME'
