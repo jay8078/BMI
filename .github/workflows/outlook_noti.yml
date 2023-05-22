@@ -37,10 +37,16 @@ jobs:
           to: jaydeepkaushik@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
+            echo "The workflow status is ${{ github.event.workflow_run.status }}"
+            
             The build job outcome was: ${{ job.status }}
+            
             The test job outcome was: ${{ needs.test.outcome }}
 
             Commit: ${{ github.sha }}
+            
             Commit message: ${{ github.event.head_commit.message }}
+            
             Commit author: ${{ github.event.head_commit.author.name }}
+            
             Workflow run ID: ${{ github.run_id }}
