@@ -1,0 +1,32 @@
+name: Email Notification
+
+on:
+  push:
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp-mail.outlook.com
+          server_port: 587
+          username: jaydeepkaushik@outlook.com
+          password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
+          subject: GitHub Action Notification
+          to: jaydeepkaushik@outlook.com
+          from: jaydeepkaushik@outlook.com
+          body: |
+            The workflow run was successful.
+
+            Commit: ${{ github.sha }}
+            Commit message: ${{ github.event.head_commit.message }}
+            Commit author: ${{ github.event.head_commit.author.name }}
+            Workflow run ID: ${{ github.run_id }}
