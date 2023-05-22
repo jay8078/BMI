@@ -4,7 +4,20 @@ on:
   push:
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Build
+         run: echo "Build....."
+         
+  test:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Build
+         run: echo "Test....."
+         
   send_notification:
+    needs: [build, test]
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +37,8 @@ jobs:
           to: jaydeepkaushik@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
-            The workflow run was successful.
+            The build job outcome was: ${{ job.status }}
+            The test job outcome was: ${{ needs.test.outcome }}
 
             Commit: ${{ github.sha }}
             Commit message: ${{ github.event.head_commit.message }}
