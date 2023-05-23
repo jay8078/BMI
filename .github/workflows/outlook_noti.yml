@@ -30,10 +30,10 @@ jobs:
         with:
           server_address: smtp-mail.outlook.com
           server_port: 587
-          username: githubactions@mcet.in
-          password: https://mcetin53592.webhook.office.com/webhookb2/9f52ab7a-063c-482f-bef2-47121ec37686@4da5ce08-e277-4580-b338-7cf1b5e7e3ba/JenkinsCI/ac27ddd53d05427ab415e6d65071d629/bc0a6809-7a6a-458d-b617-3930fd7dca4d
+          username: jaydeepkaushik@outlook.com
+          password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
           subject: GitHub Action Notification
-          to: JenkinsNotifications@groups.outlook.com
+          to: jaideepkaushik12@gmail.com
           from: jaydeepkaushik@outlook.com
           body: |
             The build job outcome was: ${{needs.build.outputs.status_build}}
