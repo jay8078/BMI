@@ -5,18 +5,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     steps:
        - name: Build
          run: echo "Build....."
+       - name: display user  
+         run: users
     outputs:
        status_build: ${{ job.status }}
          
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     steps:
        - name: Build
          run: echo "Test....."
+       - name: display user  
+         run: users
     outputs:
        status_test: ${{ job.status }}
          
