@@ -22,7 +22,7 @@ jobs:
         env:
           JF_EXPORT: ${{ secrets.JF_EXPORT }}
       # Buildd
-      - run: npm i
+      #- run: npm i
       - run: ls && pwd
       - run: tar -cvf $GITHUB_WORKFLOW.tar.gz *
       - run: ls && pwd
