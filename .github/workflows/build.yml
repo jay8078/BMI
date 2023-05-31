@@ -7,8 +7,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:20.04
+    services:
+      myservice:
+        image: myserviceimage
+        options: --net=host
     steps:
       # Checkout code
       - uses: actions/checkout@v3
