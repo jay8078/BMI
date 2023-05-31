@@ -29,7 +29,7 @@ jobs:
       - run: jfrog config show
       - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "package.json" BMI/B_${{github.run_number}}/
       - run: | 
-              echo '${{ secrets.JF_URL }}/BMI/B_${{github.run_number}}/' > latest.txt
+              echo '${{ secrets.JF_URL }}BMI/B_${{github.run_number}}/' > latest.txt
               jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "latest.txt" BMI/latest/
       
         
