@@ -27,8 +27,11 @@ jobs:
       #Upload Artifactss
       - run: jfrog --version
       - run: jfrog config show
-      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "package.json" BMI/
-      - run: echo ${GITHUB_REF##*/}
+      - run: jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "package.json" BMI/B_${{github.run_number}}
+      - run: | 
+              echo ${GITHUB_REF##*/}
+              echo '${{ secrets.JF_URL }}/BMI/B_${{github.run_number}}/' > latest.txt
+              jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "latest.txt" BMI/latest/
       
         
       
