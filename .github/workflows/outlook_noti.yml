@@ -12,7 +12,7 @@ jobs:
        - name: display user  
          run: |
               users
-              ${GITHUB_SHA::7}
+              echo ${GITHUB_SHA::7}
     outputs:
        status_build: ${{ job.status }}
          
