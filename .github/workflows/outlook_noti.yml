@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
        - name: Build
          run: echo "Build....."
@@ -17,7 +17,7 @@ jobs:
        status_build: ${{ job.status }}
          
   test:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
        - name: Build
          run: echo "Test....."
