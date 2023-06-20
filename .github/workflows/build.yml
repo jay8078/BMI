@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     steps:
       # Checkout code
       - uses: actions/checkout@v3
@@ -26,17 +26,17 @@ jobs:
       - run: ls && pwd
       #Upload Artifactss
       - run: jfrog --version
-      - run: jfrog config show
-      - run: |
-              cd routes
-              jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "*" BMI/
-      - run: echo ${GITHUB_REF#refs/heads/}
-      - name: Set outputs
-        run: |
-              if: contains(github.ref, 'dev')
-              echo "$(git rev-parse --short HEAD)"
-              if: contains(github.ref, 'main')
-              echo "$(git rev-parse --short HEAD)"
+      #- run: jfrog config show
+      #- run: |
+      #        cd routes
+      #        jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "*" BMI/
+      #- run: echo ${GITHUB_REF#refs/heads/}
+      #- name: Set outputs
+      #  run: |
+      #       if: contains(github.ref, 'dev')
+      #        echo "$(git rev-parse --short HEAD)"
+      #        if: contains(github.ref, 'main')
+      #        echo "$(git rev-parse --short HEAD)"
               
         
       
