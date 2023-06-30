@@ -1,11 +1,8 @@
 name: BMI
 
-on: 
-  pull_request_target:
-    types:
-      - opened
-    branches:
-      - 'develop'
+on:
+  pull_request:
+    branches: [ develop ]
 
 jobs:
   build:
