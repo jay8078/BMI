@@ -3,7 +3,7 @@ name: EVENT TEST
 on:
   push:
     branches:
-      - ${{ vars.CUSTOM_BRANCH }}
+      - workflows
   pull_request:
 
 jobs:
