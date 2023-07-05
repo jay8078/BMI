@@ -34,22 +34,22 @@ jobs:
         with:
           java-version: 11
       #Send Notifications
-      - name: Pre-Build notification
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{
-          "text": "
-             ***BUILD STARTED***	
-            Build Triggered by: '$GITHUB_ACTOR'
-            Job URL: '$BUILD_URL'
-            Project Name: '$GITHUB_REPOSITORY'
-            Job Name: '$GITHUB_WORKFLOW'
-            Build Number: '${{github.run_number}}'
-            Branch Name: '$GITHUB_REF'
-            Build Started at: '${{ github.event.head_commit.timestamp }}'
-            BUILD EVENT: '$GITHUB_EVENT_NAME'
-          "
-          }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+#       - name: Pre-Build notification
+#         run: |
+#           curl -X POST -H "Content-Type: application/json" \
+#           -d '{
+#           "text": "
+#              ***BUILD STARTED***	
+#             Build Triggered by: '$GITHUB_ACTOR'
+#             Job URL: '$BUILD_URL'
+#             Project Name: '$GITHUB_REPOSITORY'
+#             Job Name: '$GITHUB_WORKFLOW'
+#             Build Number: '${{github.run_number}}'
+#             Branch Name: '$GITHUB_REF'
+#             Build Started at: '${{ github.event.head_commit.timestamp }}'
+#             BUILD EVENT: '$GITHUB_EVENT_NAME'
+#           "
+#           }' ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
       # Buildd
       - run: npm i
       - run: ls && pwd
