@@ -40,6 +40,7 @@ jobs:
           password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
           subject: GitHub Action Notification
           to: jaideepkaushik12@gmail.com
+          cc: sarulathavimal@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
             The build job outcome was: ${{needs.build.outputs.status_build}}
