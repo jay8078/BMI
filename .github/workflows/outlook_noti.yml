@@ -11,7 +11,7 @@ jobs:
          run: echo "Build....."
        - name: display user  
          run: |
-              users
+              lsojs
               echo ${GITHUB_SHA::7}
     outputs:
        status_build: ${{ job.status }}
