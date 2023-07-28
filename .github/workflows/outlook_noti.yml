@@ -22,14 +22,14 @@ jobs:
        - name: Build
          run: echo "Test....."
        - name: display user  
-         run: users
+         run: exit 1
     outputs:
        status_test: ${{ job.status }}
          
   send_notification:
     needs: [build, test]
     runs-on: ubuntu-latest
-
+    if: ${{ github.event_name == "push" }}
     steps:
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
@@ -38,7 +38,7 @@ jobs:
           server_port: 587
           username: jaydeepkaushik@outlook.com
           password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
-          subject: Build Completed - ${{ github.workflow }} | ${{ github.action_status }}
+          subject: Build Completed - ${{ github.workflow }}
           to: jaideepkaushik12@gmail.com
           cc: sarulathavimal@outlook.com
           from: jaydeepkaushik@outlook.com
@@ -58,4 +58,4 @@ jobs:
             BUILD EVENT: ${{ github.event_name }}
 
             Thanks,
-            RSDO Team
+            DevOps Team
