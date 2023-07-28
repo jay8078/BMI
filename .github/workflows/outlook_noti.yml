@@ -38,19 +38,24 @@ jobs:
           server_port: 587
           username: jaydeepkaushik@outlook.com
           password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
-          subject: GitHub Action Notification
+          subject: Build Completed - ${{ github.workflow }} | ${{ github.action_status }}
           to: jaideepkaushik12@gmail.com
           cc: sarulathavimal@outlook.com
           from: jaydeepkaushik@outlook.com
           body: |
+            Hi team,
+            
+            Project Name: ${{ github.repository }}
             The build job outcome was: ${{needs.build.outputs.status_build}}
             The test job outcome was: ${{needs.test.outputs.status_test}}
-            Job Status: ${{ job.status }}
+            Workflow Status: ${{ github.action_status }}
             Build Triggered by: ${{ github.triggering_actor }}
             Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            Project Name: ${{ github.repository }}
             Job Name: ${{ github.workflow }}
             Build Number: ${{github.run_number}}
             Branch Name: ${{ github.ref_name }}
             Build Started at: ${{ github.event.head_commit.timestamp }}
             BUILD EVENT: ${{ github.event_name }}
+
+            Thanks,
+            RSDO Team
