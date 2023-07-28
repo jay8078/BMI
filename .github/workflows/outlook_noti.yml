@@ -22,7 +22,7 @@ jobs:
        - name: Build
          run: echo "Test....."
        - name: display user  
-         run: exit 1
+         run: users
     outputs:
        status_test: ${{ job.status }}
          
