@@ -26,40 +26,40 @@ jobs:
        status_test: ${{ job.status }}
          
   send_notification:
-  runs-on: ubuntu-latest
-  needs: [build, test]    
-  if: ${{ github.event_name == 'push' && always() }}
-  steps:
-    - name: clone
-      uses: actions/checkout@v3
-    - name: Get values
-      id: get_values
-      run: echo "::set-output name=VAR::Hello"
-    - name: Send email notification
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp-mail.outlook.com
-        server_port: 587
-        username: jaydeepkaushik@outlook.com
-        password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
-        subject: Build Completed - ${{ github.workflow }}
-        to: jaideepkaushik12@gmail.com
-        from: jaydeepkaushik@outlook.com
-        body: |
-          Hi team,
-          First variable: ${{ steps.get_values.outputs.VAR }}
-            Third variable: ${VARIA}
-            Project Name: ${{ github.repository }}
-            The build job outcome was: ${{needs.build.outputs.status_build}}
-            The test job outcome was: ${{needs.test.outputs.status_test}}
-            Workflow Status: ${{ github.action_status }}
-            Build Triggered by: ${{ github.triggering_actor }}
-            Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            Job Name: ${{ github.workflow }}
-            Build Number: ${{github.run_number}}
-            Branch Name: ${{ github.ref_name }}
-            Build Started at: ${{ github.event.head_commit.timestamp }}
-            BUILD EVENT: ${{ github.event_name }}
+    runs-on: ubuntu-latest
+    needs: [build, test]    
+    if: ${{ github.event_name == 'push' && always() }}
+    steps:
+      - name: clone
+        uses: actions/checkout@v3
+      - name: Get values
+        id: get_values
+        run: echo "::set-output name=VAR::Hello"
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp-mail.outlook.com
+          server_port: 587
+          username: jaydeepkaushik@outlook.com
+          password: ${{ secrets.OUTLOOK_APP_PASSWORD }}
+          subject: Build Completed - ${{ github.workflow }}
+          to: jaideepkaushik12@gmail.com
+          from: jaydeepkaushik@outlook.com
+          body: |
+            Hi team,
+            First variable: ${{ steps.get_values.outputs.VAR }}
+              Third variable: ${VARIA}
+              Project Name: ${{ github.repository }}
+              The build job outcome was: ${{needs.build.outputs.status_build}}
+              The test job outcome was: ${{needs.test.outputs.status_test}}
+              Workflow Status: ${{ github.action_status }}
+              Build Triggered by: ${{ github.triggering_actor }}
+              Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+              Job Name: ${{ github.workflow }}
+              Build Number: ${{github.run_number}}
+              Branch Name: ${{ github.ref_name }}
+              Build Started at: ${{ github.event.head_commit.timestamp }}
+              BUILD EVENT: ${{ github.event_name }}
 
-            Thanks,
-            DevOps Team
+              Thanks,
+              DevOps Team
