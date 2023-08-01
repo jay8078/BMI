@@ -33,7 +33,7 @@ jobs:
       - name: clone
         uses: actions/checkout@v3
       - name: Get values
-        run: cd $GITHUB_WORKSPACE && bash script.sh
+        run: cd $GITHUB_WORKSPACE && sudo bash script.sh
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
