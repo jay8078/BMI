@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export VAR=/home/dev/text1
+echo "VAR=/home/dev/text1" >> $GITHUB_OUTPUT
 
-echo ${VAR}
+VARI=$(cat $GITHUB_OUTPUT | grep -o 'VAR=.*' | cut -d'=' -f2)
 
 echo 'VARI = "/home/dev/text2"' >> /etc/environment
 
