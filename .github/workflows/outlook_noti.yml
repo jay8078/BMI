@@ -31,6 +31,8 @@ jobs:
     needs: [build, test]    
     if: ${{ github.event_name == 'pull_request' && always() }}
     steps:
+      - name: Get values
+        run: cd $GITHUB_WORKSPACE && bash script.sh
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
