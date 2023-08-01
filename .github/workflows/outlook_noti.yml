@@ -30,6 +30,8 @@ jobs:
     needs: [build, test]    
     if: ${{ github.event_name == 'push' && always() }}
     steps:
+      - name: clone
+        uses: actions/checkout@v3
       - name: Get values
         run: cd $GITHUB_WORKSPACE && bash script.sh
       - name: Send email notification
