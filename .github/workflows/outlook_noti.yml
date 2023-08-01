@@ -47,7 +47,9 @@ jobs:
           from: jaydeepkaushik@outlook.com
           body: |
             Hi team,
-            
+            First variable: $VAR
+            Second varibale: $VARI
+            Third variable: $VARIA
             Project Name: ${{ github.repository }}
             The build job outcome was: ${{needs.build.outputs.status_build}}
             The test job outcome was: ${{needs.test.outputs.status_test}}
