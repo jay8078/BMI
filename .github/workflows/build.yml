@@ -13,32 +13,9 @@ jobs:
       # Checkout and install prerequisites
       - name: Use Nodejs
         uses: actions/checkout@v3
-        with:
-          node-version: '16'
-      - name: Artifactory 
-        uses: jfrog/setup-jfrog-cli@v1
-        env:
-          JF_EXPORT: ${{ secrets.JF_EXPORT }}
-      # Buildd
-      - run: npm i
-      - run: ls && pwd
-      - run: tar -cvf $GITHUB_WORKFLOW.tar.gz *
-      - run: ls && pwd
-      #Upload Artifactss
-      - run: echo ${{ github.event.number }}
-      #- run: jfrog config show
-      #- run: |
-      #        cd routes
-      #        jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "*" BMI/
-      #- run: echo ${GITHUB_REF#refs/heads/}
-      #- name: Set outputs
-      #  run: |
-      #       if: contains(github.ref, 'dev')
-      #        echo "$(git rev-parse --short HEAD)"
-      #        if: contains(github.ref, 'main')
-      #        echo "$(git rev-parse --short HEAD)"
-              
-        
+
+      - name: Get Pull number
+        run: echo ${{ github.event.number }}    
       
         
       
