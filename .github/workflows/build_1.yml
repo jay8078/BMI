@@ -1,26 +1,12 @@
-name: BMI_1
-
 on:
-  pull_request:
-  push:
+  pull_request
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
-
 jobs:
-  build:
+  prJob:    
+    name: Print event
     runs-on: ubuntu-latest
     steps:
-      # Checkout code
-      - uses: actions/checkout@v3
-      # Checkout and install prerequisites
-      - name: Use Nodejs
-        uses: actions/checkout@v3
-
-      - name: Get Pull number
-        run: echo "$GITHUB_PR_NUMBER"
-      
-        
-      
-        
-      
+      - run: |
+          echo "$GITHUB_PR_NUMBER"
