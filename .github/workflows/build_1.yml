@@ -1,4 +1,4 @@
-name: BMI
+name: BMI_1
 
 on:
   pull_request:
