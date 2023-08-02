@@ -7,10 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      myservice:
-        image: myserviceimage
-        options: --net=host
     steps:
       # Checkout code
       - uses: actions/checkout@v3
