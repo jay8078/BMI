@@ -21,13 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to get a users email
     steps:
-      - name: get email
-        id: test
-        uses: evvanErb/get-github-email-by-username-action@v1.25
-        with:
-          github-username: 'sarulathar-ramon' # This is the input username
-          #token: 'token' # This is an optional input of a PAT to use a more reliable way to get a user's email
-          
-      # Use the output from the `test` step
-      - name: Print the found email
-        run: echo "The email is ${{ steps.test.outputs.email }}" # Example of how to access output email
+      - name: clone
+        uses: actions/checkout@v3
+        
+      - name: get mail
+        run: git log -n 1 --pretty=format:%ae remotes/origin/${{ github.head_ref }}
