@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "$GITHUB_PR_NUMBER"
+          run: echo "Pull Request Number: ${{ github.event.pull_request.number }}"
