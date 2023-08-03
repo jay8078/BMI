@@ -1,4 +1,5 @@
-name: JEAUD
+
+name: Test Get Email from Github Username
 
 on:
   pull_request:
@@ -6,6 +7,7 @@ on:
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+  
 jobs:
   prJob:    
     name: Print event
@@ -14,3 +16,18 @@ jobs:
       - run: | 
             echo "Pull Request Number ${{ github.event.pull_request.number }}"
             echo $GITHUB_PR_NUMBER
+
+  get_user_email:
+    runs-on: ubuntu-latest
+    name: A job to get a users email
+    steps:
+      - name: get email
+        id: test
+        uses: evvanErb/get-github-email-by-username-action@v1.25
+        with:
+          github-username: 'sarulathar-ramon' # This is the input username
+          #token: 'token' # This is an optional input of a PAT to use a more reliable way to get a user's email
+          
+      # Use the output from the `test` step
+      - name: Print the found email
+        run: echo "The email is ${{ steps.test.outputs.email }}" # Example of how to access output email
