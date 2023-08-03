@@ -11,5 +11,4 @@ jobs:
     name: Print event
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          run: echo "Pull Request Number: ${{ github.event.pull_request.number }}"
+      - run: echo "Pull Request Number ${{ github.event.pull_request.number }}"
