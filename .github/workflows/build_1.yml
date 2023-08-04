@@ -23,6 +23,13 @@ jobs:
     steps:
       - name: clone
         uses: actions/checkout@v3
+       
+      - name: Show GitHub context   
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}   
+        shell: bash 
+        run: echo "$GITHUB_CONTEXT"
+  
         
       - name: get mail
         run: | 
