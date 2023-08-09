@@ -13,11 +13,20 @@ jobs:
     name: Print event
     runs-on: ubuntu-latest
     steps:
+      - name: clone
+        uses: actions/checkout@v3
+        
       - run: | 
+            cd $GITHUB_WORKSPACE
             echo "Pull Request Number ${{ github.event.pull_request.number }}"
             echo $GITHUB_PR_NUMBER
             echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
             echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+
+      - name: get values
+        run: |
+              echo "Branch: ${{ env.branch }}"
+              echo "Sha: ${{ env.sha_short }}"
 
   get_user_email:
     runs-on: ubuntu-latest
@@ -32,8 +41,7 @@ jobs:
         shell: bash 
         run: | 
               echo "$GITHUB_CONTEXT"
-              echo "Branch: ${{ env.branch }}"
-              echo "Sha: ${{ env.sha_short }}"
+
   
         
       - name: get mail
