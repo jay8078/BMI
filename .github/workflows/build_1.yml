@@ -22,8 +22,13 @@ jobs:
             echo $GITHUB_PR_NUMBER
             echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
             echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+            
       - name: Display source branch commit hash
-        run: echo "Source branch commit hash- ${{ github.event.pull_request.head.sha }}"
+        run: |
+            echo "Source branch commit hash- ${{ github.event.pull_request.head.sha }}"
+            full_commit_sha=${{ github.event.pull_request.head.sha }}
+            short_commit_sha=${full_commit_sha:0:7}
+            echo "Short commit SHA: $short_commit_sha"
         
       - name: get values
         run: |
