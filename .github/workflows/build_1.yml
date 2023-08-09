@@ -16,6 +16,8 @@ jobs:
       - run: | 
             echo "Pull Request Number ${{ github.event.pull_request.number }}"
             echo $GITHUB_PR_NUMBER
+            echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+            echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
 
   get_user_email:
     runs-on: ubuntu-latest
@@ -28,7 +30,10 @@ jobs:
         env: 
           GITHUB_CONTEXT: ${{ toJson(github) }}   
         shell: bash 
-        run: echo "$GITHUB_CONTEXT"
+        run: | 
+              echo "$GITHUB_CONTEXT"
+              echo "Branch: ${{ env.branch }}"
+              echo "Sha: ${{ env.sha_short }}"
   
         
       - name: get mail
