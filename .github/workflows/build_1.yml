@@ -1,4 +1,5 @@
-name: JEAUD
+
+name: Test Get Email from Github Username
 
 on:
   pull_request:
@@ -6,9 +7,51 @@ on:
 
 env:
   GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+  
 jobs:
   prJob:    
     name: Print event
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Pull Request Number ${{ github.event.pull_request.number }}"
+      - name: clone
+        uses: actions/checkout@v3
+        
+      - run: | 
+            cd $GITHUB_WORKSPACE
+            echo "Pull Request Number ${{ github.event.pull_request.number }}"
+            echo $GITHUB_PR_NUMBER
+            echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+            echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
+            
+      - name: Display source branch commit hash
+        run: |
+            echo "Source branch commit hash- ${{ github.event.pull_request.head.sha }}"
+            full_commit_sha=${{ github.event.pull_request.head.sha }}
+            short_commit_sha=${full_commit_sha:0:7}
+            echo "Short commit SHA: $short_commit_sha"
+        
+      - name: get values
+        run: |
+              echo "Branch: ${{ env.branch }}"
+              echo "Sha: ${{ env.sha_short }}"
+
+  get_user_email:
+    runs-on: ubuntu-latest
+    name: A job to get a users email
+    steps:
+      - name: clone
+        uses: actions/checkout@v3
+       
+      - name: Show GitHub context   
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}   
+        shell: bash 
+        run: | 
+              echo "$GITHUB_CONTEXT"
+
+  
+        
+      - name: get mail
+        run: | 
+             echo $GITHUB_EVENT_PATH
+             cat /home/runner/work/_temp/_github_workflow/event.json
