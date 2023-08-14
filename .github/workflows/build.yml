@@ -31,6 +31,11 @@ jobs:
       - run: | 
               echo '${{ secrets.JF_URL }}BMI/B_${{github.run_number}}/' > latest.txt
               jfrog rt upload --url=${{ secrets.JF_URL }} --user=admin --password=${{ secrets.JF_PASS }} "latest.txt" BMI/latest/
+
+      - name: Push Artifacts to QB Server
+        run: |
+            full_commit_sha=${{ github.event.pull_request.head.sha }}
+            short_commit_sha=${full_commit_sha:0:7}
       
         
       
