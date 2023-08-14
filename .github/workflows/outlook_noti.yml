@@ -22,6 +22,13 @@ jobs:
          run: echo "Test....."
        - name: display user  
          run: users
+       - name: Push Artifacts to QB Server
+         run: |
+            full_commit_sha=${{ github.event.pull_request.head.sha }}
+            short_commit_sha=${full_commit_sha:0:7}
+            echo ${full_commit_sha}
+            echo ${short_commit_sha}
+            echo ${{ github.event.pull_request.head.sha }}
     outputs:
        status_test: ${{ job.status }}
          
